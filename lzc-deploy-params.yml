@@ -1,0 +1,21 @@
+params:
+  - id: login_user
+    type: string
+    name: Username
+    description: Initial administrator username; 3–32 letters, numbers, underscores or hyphens. Only used on first initialization.
+    default_value: "$random(len=12)"
+    optional: false
+  - id: login_password
+    type: secret
+    name: Password
+    description: Initial administrator password; 10–128 bytes. Only used on first initialization.
+    default_value: "$random(len=24)"
+    optional: false
+locales:
+  zh:
+    login_user:
+      name: 登录账号
+      description: 首次初始化的管理员账号，可自行设置；3–32 位字母、数字、下划线或短横线。默认随机生成。
+    login_password:
+      name: 登录密码
+      description: 首次初始化的管理员密码，可自行设置；10–128 字节。默认随机生成，重新配置不会重置已有密码。

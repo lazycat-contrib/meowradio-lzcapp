@@ -1,0 +1,49 @@
+version: 1
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: dist/meowradio.lpk
+  target_arch: amd64
+update:
+  strategy: publish
+  allow_downgrade: false
+  version_source:
+    type: image
+    image: meowradio
+build:
+  toolchains: []
+  run_buildscript: false
+images:
+  - id: meowradio
+    target: service
+    service: meowradio
+    source: ghcr.io/ca-x/meowradio
+    channel: stable
+    sort: semver
+    tag_regex: '^v?\d+\.\d+\.\d+$'
+    delivery:
+      mode: lazycat
+stores:
+  official:
+    enabled: true
+    skip_if_version_exists: true
+    create_if_missing: true
+    changelog_locales: [zh, en]
+    application:
+      language: zh
+      name: 阿喵收音机
+      brief: 把世界调到喜欢的频道
+      description: 阿喵收音机是一款自托管网络收音机，支持搜索全球电台、保存个人收藏、切换播放器主题和设置睡眠定时。安装时可自定义账号和密码，默认随机生成，登录表单自动填充。电台目录由 Radio Browser 提供，音源可用性取决于网络与电台服务。
+      keywords: 收音机,电台,音乐,Radio Browser
+      source: https://github.com/ca-x/meowRadio
+      source_author: ca-x
+      support_pc: true
+      screenshot_pc_files:
+        - .github/screenshots/radio.png
+        - .github/screenshots/themes.png
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: 阿喵收音机
+    summary: 全球电台搜索、个人收藏、多种主题与睡眠定时。

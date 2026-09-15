@@ -1,0 +1,37 @@
+application:
+  subdomain: meowradio
+  upstreams:
+    - location: /
+      backend: http://meowradio:3000/
+  injects:
+    - id: login-autofill
+      on: browser
+      when:
+        - /
+        - /login
+        - /login/
+      do:
+        - src: builtin://simple-inject-password
+          params:
+            user: "{{ .U.login_user }}"
+            password: "{{ .U.login_password }}"
+            userSelector: 'form.account-form:has(input[autocomplete="current-password"]) #username'
+            passwordSelector: '#password[autocomplete="current-password"]'
+            formSelector: 'form.account-form:has(input[autocomplete="current-password"])'
+            submitSelector: 'form.account-form:has(input[autocomplete="current-password"]) button.primary'
+            observerTimeoutMs: 60000
+services:
+  meowradio:
+    # upstream: ghcr.io/ca-x/meowradio:v0.1.1
+    image: ghcr.io/ca-x/meowradio:v0.1.1
+    run_as: '10001:10001'
+    environment:
+      - MEOW_INIT_USERNAME={{ .U.login_user }}
+      - MEOW_INIT_PASSWORD={{ .U.login_password }}
+      - MEOW_SECURE_COOKIE=true
+    binds:
+      - /lzcapp/var/data:/data
+usage: |
+  安装向导中的账号和密码默认随机生成，也可自行设置。打开“登录 / 注册”后自动填充登录。
+  账号和密码仅用于首次初始化，重新配置不会重置已有账号。数据库和收藏保存在应用数据目录。
+  电台可用性取决于音源及网络；HTTPS 页面收听 HTTP 电台时可在连接设置选择服务端中转。
