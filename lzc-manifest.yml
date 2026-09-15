@@ -24,7 +24,8 @@ services:
   meowradio:
     # upstream: ghcr.io/ca-x/meowradio:v0.1.1
     image: registry.lazycat.cloud/czyt/ca-x/meowradio:1feb3df8f4db2aec
-    run_as: '10001:10001'
+    # Avoid idmapped mounts: some LazyCat hosts fail with EOVERFLOW for UID 10001.
+    user: '0:0'
     environment:
       - MEOW_INIT_USERNAME={{ .U.login_user }}
       - MEOW_INIT_PASSWORD={{ .U.login_password }}
