@@ -23,7 +23,7 @@ application:
 services:
   meowradio:
     # upstream: ghcr.io/ca-x/meowradio:v0.1.1
-    image: ghcr.io/ca-x/meowradio:v0.1.1
+    image: registry.lazycat.cloud/czyt/ca-x/meowradio:1feb3df8f4db2aec
     run_as: '10001:10001'
     environment:
       - MEOW_INIT_USERNAME={{ .U.login_user }}
