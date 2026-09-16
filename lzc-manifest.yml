@@ -21,8 +21,8 @@ application:
             observerTimeoutMs: 60000
 services:
   meowradio:
-    # upstream: ghcr.io/ca-x/meowradio:v0.2.0
-    image: registry.lazycat.cloud/czyt/ca-x/meowradio:ffd45148be85b7c3
+    # upstream: ghcr.io/ca-x/meowradio:v0.2.1
+    image: registry.lazycat.cloud/czyt/ca-x/meowradio:6a3fd26b44415368
     # Avoid idmapped mounts: some LazyCat hosts fail with EOVERFLOW for UID 10001.
     user: '0:0'
     environment:
