@@ -1,5 +1,5 @@
 package: community.lazycat.app.meowradio
-version: 0.2.1
+version: 0.3.0
 name: 阿喵收音机
 description: 自托管网络收音机，支持全球电台搜索、个人收藏、多种主题与睡眠定时。
 min_os_version: 1.5.0
